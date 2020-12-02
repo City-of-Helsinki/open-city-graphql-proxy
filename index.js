@@ -4,7 +4,7 @@ const schema = gql`
 
   scalar DateTime
 
-  type Node {
+  type NodeMeta {
     id: ID!
     createdAt: DateTime
     updatedAt: DateTime
@@ -12,6 +12,7 @@ const schema = gql`
 
   """TODO: take from Profile"""
   type Person {
+    meta: NodeMeta
     name: String
     identificationStrength: IdentificationStrength
     contactDetails: ContactInfo
@@ -39,6 +40,7 @@ const schema = gql`
 
   """TODO: merge beta.kultus organisation, etc"""
   type Organisation {
+    meta: NodeMeta
     contactDetails: ContactInfo
   }
 
@@ -57,6 +59,7 @@ const schema = gql`
   PalvelutarjotinEventNode, Kukkuu event.
   """
   type Event {
+    meta: NodeMeta
     name: String!
     description: String
     shortDescription: String
@@ -77,6 +80,7 @@ const schema = gql`
 
   """TODO: improve (a lot) over Linked events' offer type"""
   type EventPricing {
+    meta: NodeMeta
     todo: String
   }
 
@@ -92,10 +96,12 @@ const schema = gql`
 
   """TODO: take this from Linked events Image type."""
   type MediaResource {
+    meta: NodeMeta
     todo: String
   }
 
   type EventOccurrence {
+    meta: NodeMeta
     "which event this is an occurrence of"
     ofEvent: Event
     happensAt: TimeDescription
@@ -138,6 +144,7 @@ const schema = gql`
   Rules about who can enroll to an event and how
   """
   type EnrolmentPolicy {
+    meta: NodeMeta
     type: [EnrolmentPolicyType]!
     enrolmentTime: TimeDescription
     allowedParticipantCategories: [Keyword]!
@@ -160,6 +167,7 @@ const schema = gql`
   Information about enrolled participant(s) in an event occurrence
   """
   type Enrolment {
+    meta: NodeMeta
     event: EventOccurrence
     enroller: Person
     participantCount: Int!
@@ -205,6 +213,7 @@ const schema = gql`
   events place, Kukkuu venue
   """
   type Venue {
+    meta: NodeMeta
     name: String
     location: LocationDescription
     description: String
@@ -222,6 +231,7 @@ const schema = gql`
 
   """TODO: take this from respa / Hauki"""
   type OpeningHours {
+    meta: NodeMeta
     todo: String
   }
 
@@ -232,11 +242,13 @@ const schema = gql`
 
   """TODO: take this from service map / TPREK"""
   type AccessibilityProfile {
+    meta: NodeMeta
     todo: String
   }
 
   """TODO: combine beta.kultus Venue stuff with respa equipment type"""
   type VenueFacility {
+    meta: NodeMeta
     name: String!
     categories: [Keyword]!
   }
@@ -276,6 +288,7 @@ const schema = gql`
   bees), a specification of what is being requested.
   """
   type EquipmentRequest {
+    meta: NodeMeta
     requestedEquipment: String!
     estimatedAmount: Int
     requestedForEvent: Event
