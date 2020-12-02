@@ -16,7 +16,7 @@ const schema = gql`
     name: String
     identificationStrength: IdentificationStrength
     contactDetails: ContactInfo
-    preferredLanguages: [Language]
+    preferredLanguages: [Language!]
     preferredMedium: ContactMedium
   }
 
@@ -64,18 +64,18 @@ const schema = gql`
     description: String
     shortDescription: String
     descriptionResources: DescriptionResources
-    keywords: [Keyword]!
+    keywords: [Keyword!]!
     eventDataSource: String
-    occurrences: [EventOccurrence]!
-    pricing: [EventPricing]
+    occurrences: [EventOccurrence!]!
+    pricing: [EventPricing!]
     organiser: LegalEntity
     publisher: LegalEntity
     contactPerson: LegalEntity
-    eventLanguages: [Language]!
-    subEvents: [Event]!
+    eventLanguages: [Language!]!
+    subEvents: [Event!]!
     superEvent: Event
     enrolmentPolicy: EnrolmentPolicy
-    targetAudience: [Keyword]
+    targetAudience: [Keyword!]
   }
 
   """TODO: improve (a lot) over Linked events' offer type"""
@@ -89,9 +89,9 @@ const schema = gql`
   facility, event or venue, such as images, videos, info pages, etc.
   """
   type DescriptionResources {
-    mediaResources: [MediaResource]!
-    infoUrls: [String]!
-    externalLinks: [String]!
+    mediaResources: [MediaResource!]!
+    infoUrls: [String!]!
+    externalLinks: [String!]!
   }
 
   """TODO: take this from Linked events Image type."""
@@ -115,12 +115,12 @@ const schema = gql`
 
     location: LocationDescription
     status: EventOccurrenceStatus
-    enrolments: [Enrolment]!
+    enrolments: [Enrolment!]!
     minimumAttendeeCount: Int
     maximumAttendeeCount: Int
     currentlyAvailableParticipantCount: Int
     "for events where equipment is requested from the City of Helsinki"
-    cityEquipmentRequests: [EquipmentRequest]!
+    cityEquipmentRequests: [EquipmentRequest!]
   }
 
   enum EventOccurrenceStatus {
@@ -145,9 +145,9 @@ const schema = gql`
   """
   type EnrolmentPolicy {
     meta: NodeMeta
-    type: [EnrolmentPolicyType]!
+    type: [EnrolmentPolicyType!]!
     enrolmentTime: TimeDescription
-    allowedParticipantCategories: [Keyword]!
+    allowedParticipantCategories: [Keyword!]!
     participantMinimumAge: Int!
     participantMaximumAge: Int!
     "minimum number of people who can enrol together (at the same time)"
@@ -171,10 +171,10 @@ const schema = gql`
     event: EventOccurrence
     enroller: Person
     participantCount: Int!
-    participants: [Person]
+    participants: [Person!]
     participantCategory: Keyword
     overseerCount: Int
-    overseers: [Person]
+    overseers: [Person!]
     requestedMethodOfNotification: ContactMedium
     status: EnrolmentStatus
     extraInformation: String
@@ -226,7 +226,7 @@ const schema = gql`
     accessibilityProfile: AccessibilityProfile
     arrivalInstructions: String
     additionalInfo: String
-    facilities: [VenueFacility]
+    facilities: [VenueFacility!]
   }
 
   """TODO: take this from respa / Hauki"""
@@ -250,7 +250,7 @@ const schema = gql`
   type VenueFacility {
     meta: NodeMeta
     name: String!
-    categories: [Keyword]!
+    categories: [Keyword!]
   }
 
   """
@@ -258,9 +258,9 @@ const schema = gql`
   """
   type ContactInfo {
     contactUrl: String
-    phoneNumbers: [PhoneNumber]!
-    emailAddresses: [String]!
-    postalAddresses: [Address]!
+    phoneNumbers: [PhoneNumber!]!
+    emailAddresses: [String!]!
+    postalAddresses: [Address!]!
   }
 
   type PhoneNumber {
@@ -279,7 +279,7 @@ const schema = gql`
   """
   type GeographicalLocation {
     type: String!
-    coordinates: [Float]!
+    coordinates: [Float!]!
   }
 
   """
@@ -299,9 +299,9 @@ const schema = gql`
 
   type Query {
     me: Person!
-    people: [Person]
-    events: [Event]
-    venues: [Venue]
+    people: [Person!]!
+    events: [Event!]!
+    venues: [Venue!]!
   }
 
 `;
