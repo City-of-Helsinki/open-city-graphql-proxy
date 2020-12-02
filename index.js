@@ -7,14 +7,6 @@ const { sharedSchema } = require('./schemata/shared.js');
 
 const schema = gql`
 
-  scalar DateTime
-
-  type NodeMeta {
-    id: ID!
-    createdAt: DateTime
-    updatedAt: DateTime
-  }
-
   """TODO: take from Profile"""
   type Person {
     meta: NodeMeta
@@ -23,11 +15,6 @@ const schema = gql`
     contactDetails: ContactInfo
     preferredLanguages: [Language!]
     preferredMedium: ContactMedium
-  }
-
-  """TODO: take from Profile"""
-  enum Language {
-    FI
   }
 
   enum IdentificationStrength {
@@ -47,11 +34,6 @@ const schema = gql`
   type Organisation {
     meta: NodeMeta
     contactDetails: ContactInfo
-  }
-
-  """TODO: merge all free tags, categories, and keywords"""
-  type Keyword {
-    name: String!
   }
 
   union LegalEntity = Person | Organisation
@@ -89,22 +71,6 @@ const schema = gql`
     todo: String
   }
 
-  """
-  Resources (media) that provide extra description of a resource,
-  facility, event or venue, such as images, videos, info pages, etc.
-  """
-  type DescriptionResources {
-    mediaResources: [MediaResource!]!
-    infoUrls: [String!]!
-    externalLinks: [String!]!
-  }
-
-  """TODO: take this from Linked events Image type."""
-  type MediaResource {
-    meta: NodeMeta
-    todo: String
-  }
-
   type EventOccurrence {
     meta: NodeMeta
     "which event this is an occurrence of"
@@ -134,15 +100,6 @@ const schema = gql`
     CANCELLED
     RESCHEDULED
     POSTPONED
-  }
-
-  """
-  any kind of description answering the question "when".
-  """
-  type TimeDescription {
-    starting: DateTime
-    ending: DateTime
-    otherTime: TimeDescription
   }
 
   """
