@@ -7,37 +7,6 @@ const { sharedSchema } = require('./schemata/shared.js');
 
 const schema = gql`
 
-  """TODO: take from Profile"""
-  type Person {
-    meta: NodeMeta
-    name: String
-    identificationStrength: IdentificationStrength
-    contactDetails: ContactInfo
-    preferredLanguages: [Language!]
-    preferredMedium: ContactMedium
-  }
-
-  enum IdentificationStrength {
-    "If this person is just a pseudoperson for contacting"
-    NONIDENTIFIABLE
-    "If the identity of this person is not known at all"
-    UNIDENTIFIED
-    "If the person has authenticated with at least some method"
-    AUTHENTICATED
-    "If the person has done some identifiable action such as payment"
-    INDIRECT
-    "If the person has proved their legal identity"
-    LEGALLY_CONNECTED
-  }
-
-  """TODO: merge beta.kultus organisation, etc"""
-  type Organisation {
-    meta: NodeMeta
-    contactDetails: ContactInfo
-  }
-
-  union LegalEntity = Person | Organisation
-
   """
   An organised event - something that happens at a specific time, has a
   specific topic or content, and people can participate.  Examples include
@@ -142,14 +111,6 @@ const schema = gql`
     extraInformation: String
   }
 
-  enum ContactMedium {
-    SMS
-    EMAIL
-    SMS_AND_EMAIL
-    MOBILE_NOTIFICATION
-    ASIOINTI
-  }
-
   enum EnrolmentStatus {
     REQUESTED
     QUEUED
@@ -213,26 +174,6 @@ const schema = gql`
     meta: NodeMeta
     name: String!
     categories: [Keyword!]
-  }
-
-  """
-  Contact details for a person, legal entity, venue or project
-  """
-  type ContactInfo {
-    contactUrl: String
-    phoneNumbers: [PhoneNumber!]!
-    emailAddresses: [String!]!
-    postalAddresses: [Address!]!
-  }
-
-  type PhoneNumber {
-    countryCode: String!
-    restNumber: String!
-  }
-
-  """TODO: give real structure"""
-  type Address {
-    streetAddress: String!
   }
 
   """
