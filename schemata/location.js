@@ -27,10 +27,15 @@ exports.locationSchema = `
   """
   type LocationDescription {
     url: String
-    geoLocation: GeographicalLocation
+    geoLocation: FeatureObject
     streetAddress: Address
     explanation: String
     venue: Venue
+  }
+
+  "Placeholder for FeatureObject imported from graphql-geojson"
+  type FeatureObject {
+    placeHolder: String
   }
 
   """TODO: take this from service map / TPREK"""
@@ -44,15 +49,6 @@ exports.locationSchema = `
     meta: NodeMeta
     name: String!
     categories: [Keyword!]
-  }
-
-  """
-  This should be just any GeoJSON object, see
-  https://github.com/ghengeveld/graphql-geojson
-  """
-  type GeographicalLocation {
-    type: String!
-    coordinates: [Float!]!
   }
 
 `;
