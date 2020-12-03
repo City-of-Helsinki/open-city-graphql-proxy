@@ -27,15 +27,10 @@ exports.locationSchema = `
   """
   type LocationDescription {
     url: String
-    geoLocation: FeatureObject
+    geoLocation: GeoJSONFeature
     streetAddress: Address
     explanation: String
     venue: Venue
-  }
-
-  "Placeholder for FeatureObject imported from graphql-geojson"
-  type FeatureObject {
-    placeHolder: String
   }
 
   """TODO: take this from service map / TPREK"""

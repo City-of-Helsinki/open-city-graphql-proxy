@@ -1,5 +1,4 @@
 const { makeExecutableSchema, ApolloServer } = require('apollo-server');
-// const { mergeSchemas } = require('@graphql-tools/merge');
 
 const { actorSchema } = require('./schemata/actor.js');
 const { eventSchema } = require('./schemata/event.js');
@@ -8,7 +7,7 @@ const { reservationSchema } = require('./schemata/reservation.js');
 const { sharedSchema } = require('./schemata/shared.js');
 const { geoSchema } = require('./schemata/geojson.js');
 
-const schema = `
+const querySchema = `
 
   type Query {
     me: Person!
@@ -26,14 +25,11 @@ const resolvers = {
   },
 };
 
-const combinedSchema = //mergeSchemas({ schemas: [
-  makeExecutableSchema({
-    typeDefs: [schema, sharedSchema,
-      actorSchema, eventSchema, locationSchema, reservationSchema],
-    resolvers
-  })//,
-//  geoSchema
-//]});
+const combinedSchema = makeExecutableSchema({
+  typeDefs: [querySchema, sharedSchema, geoSchema,
+    actorSchema, eventSchema, locationSchema, reservationSchema],
+  resolvers
+});
 
 const server = new ApolloServer({schema: combinedSchema});
 server.listen().then(({url}) => console.log(`😅 server maybe at ${url}`));
