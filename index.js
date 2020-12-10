@@ -9,6 +9,9 @@ const { geoSchema } = require('./schemata/geojson.js');
 
 const querySchema = `
 
+  directive @origin(service: String, type: String, attr: String)
+  repeatable on OBJECT | FIELD_DEFINITION
+
   type Query {
     me: Person!
     people: [Person!]!

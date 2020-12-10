@@ -23,7 +23,9 @@ exports.sharedSchema = `
   """
   type TimeDescription {
     starting: DateTime
+	@origin(service: "linked", type: "event", attr: "start_time")
     ending: DateTime
+	@origin(service: "linked", type: "event", attr: "end_time")
     otherTime: TimeDescription
   }
 
@@ -33,7 +35,10 @@ exports.sharedSchema = `
   """
   type DescriptionResources {
     mediaResources: [MediaResource!]!
+	@origin(service: "linked", type: "event", attr: "images")
+	@origin(service: "linked", type: "event", attr: "videos")
     infoUrls: [String!]!
+	@origin(service: "linked", type: "event", attr: "info_url")
     externalLinks: [String!]!
   }
 

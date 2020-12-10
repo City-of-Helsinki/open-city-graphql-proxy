@@ -30,6 +30,7 @@ exports.locationSchema = `
     geoLocation: GeoJSONFeature
     streetAddress: Address
     explanation: String
+	@origin(service: "linked", type: "event", attr: "location_extra_info")
     venue: Venue
   }
 

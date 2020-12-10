@@ -42,7 +42,9 @@ exports.actorSchema = `
   """
   Contact details for a person, legal entity, venue or project
   """
-  type ContactInfo {
+  type ContactInfo
+    @origin(service: "linked", type: "event", attr: "provider_contact_info")
+  {
     contactUrl: String
     phoneNumbers: [PhoneNumber!]!
     emailAddresses: [String!]!

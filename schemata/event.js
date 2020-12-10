@@ -10,21 +10,35 @@ exports.eventSchema = `
   type Event {
     meta: NodeMeta
     name: String!
+	@origin(service: "linked", type: "event", attr: "name")
     description: String
+	@origin(service: "linked", type: "event", attr: "description")
     shortDescription: String
+	@origin(service: "linked", type: "event", attr: "short_description")
     descriptionResources: DescriptionResources
     keywords: [Keyword!]!
+	@origin(service: "linked", type: "event", attr: "keywords")
     eventDataSource: String
+	@origin(service: "linked", type: "event", attr: "data_source")
     occurrences: [EventOccurrence!]!
     pricing: [EventPricing!]
+	@origin(service: "linked", type: "event", attr: "offers")
     organiser: LegalEntity
+	@origin(service: "linked", type: "event", attr: "provider")
     publisher: LegalEntity
+	@origin(service: "linked", type: "event", attr: "publisher")
+    published: DateTime
+	@origin(service: "linked", type: "event", attr: "date_published")
     contactPerson: LegalEntity
     eventLanguages: [Language!]!
+	@origin(service: "linked", type: "event", attr: "in_language")
     subEvents: [Event!]!
+	@origin(service: "linked", type: "event", attr: "sub_events")
     superEvent: Event
+	@origin(service: "linked", type: "event", attr: "super_event")
     enrolmentPolicy: EnrolmentPolicy
     targetAudience: [Keyword!]
+	@origin(service: "linked", type: "event", attr: "audience")
   }
 
   """TODO: improve (a lot) over Linked events' offer type"""
@@ -47,11 +61,16 @@ exports.eventSchema = `
     estimatedAttendeeCount: Int
 
     location: LocationDescription
+	@origin(service: "linked", type: "event", attr: "location")
     status: EventOccurrenceStatus
+	@origin(service: "linked", type: "event", attr: "event_status")
     enrolments: [Enrolment!]!
     minimumAttendeeCount: Int
+	@origin(service: "linked", type: "extension_course", attr: "minimum_attendee_capacity")
     maximumAttendeeCount: Int
+	@origin(service: "linked", type: "extension_course", attr: "maximum_attendee_capacity")
     currentlyAvailableParticipantCount: Int
+	@origin(service: "linked", type: "extension_course", attr: "remaining_attendee_capacity")
     "for events where equipment is requested from the City of Helsinki"
     cityEquipmentRequests: [EquipmentRequest!]
   }
@@ -71,9 +90,13 @@ exports.eventSchema = `
     meta: NodeMeta
     type: [EnrolmentPolicyType!]!
     enrolmentTime: TimeDescription
+	@origin(service: "linked", type: "extension_course", attr: "enrolment_start_time")
+	@origin(service: "linked", type: "extension_course", attr: "enrolment_end_time")
     allowedParticipantCategories: [Keyword!]!
     participantMinimumAge: Int!
+	@origin(service: "linked", type: "event", attr: "audience_min_age")
     participantMaximumAge: Int!
+	@origin(service: "linked", type: "event", attr: "audience_max_age")
     "minimum number of people who can enrol together (at the same time)"
     minimumEnrolmentCount: Int
     "maximum number of people who can enrol together (at the same time)"
