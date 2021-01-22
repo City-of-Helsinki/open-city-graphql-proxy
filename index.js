@@ -6,6 +6,7 @@ const { locationSchema } = require('./schemata/location.js');
 const { reservationSchema } = require('./schemata/reservation.js');
 const { sharedSchema } = require('./schemata/shared.js');
 const { geoSchema } = require('./schemata/geojson.js');
+const { searchSchema, searchExample } = require('./schemata/search.js');
 
 const querySchema = `
 
@@ -13,23 +14,32 @@ const querySchema = `
   repeatable on OBJECT | FIELD_DEFINITION
 
   type Query {
+    """
     me: Person!
     people: [Person!]!
     events: [Event!]!
     venues: [Venue!]!
+    """
+    unifiedSearch(
+      q: String,
+      categories: [UnifiedSearchResultCategory!],
+      excludedCategories: [UnifiedSearchResultCategory!],
+      first: Int,
+      after: String): SearchResultConnection
   }
 
 `;
 
 const resolvers = {
   Query: {
-    me() { return { name: "Matti Meikäläinen" }; },
-    people() { return []; },
+    //me() { return { name: "Matti Meikäläinen" }; },
+    //people() { return []; },
+    unifiedSearch() { return searchExample; },
   },
 };
 
 const combinedSchema = makeExecutableSchema({
-  typeDefs: [querySchema, sharedSchema, geoSchema,
+  typeDefs: [querySchema, sharedSchema, geoSchema, searchSchema,
     actorSchema, eventSchema, locationSchema, reservationSchema],
   resolvers
 });
