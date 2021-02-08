@@ -10,6 +10,14 @@ exports.searchSchema = `
     SERVICE
   }
 
+  enum UnifiedSearchTheme {
+    LIBRARY
+    SPORTS
+    CULTURE
+    ACTIVITY
+    YOUTH
+  }
+
   type SearchResultConnection {
     count: Int
     max_score: Float
@@ -32,10 +40,27 @@ exports.searchSchema = `
   type SearchResultNode {
     _score: Float
     id: ID!
+
+    """
+    E.g. title of book, name of event, or what a place is called
+    """
     name: LanguageString!
     description: LanguageString!
+
+    """
+    Images, videos, URLs for more info, and the like.
+    """
     resources: DescriptionResources
+
+    """
+    Where the user should be sent if they want to zoom in on this item.
+    """
     canonicalUrl: String!
+
+    """
+    All content categories this item belongs to, in decreasing order of
+    importance
+    """
     searchCategories: [UnifiedSearchResultCategory!]!
   }
 

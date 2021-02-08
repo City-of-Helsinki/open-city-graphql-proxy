@@ -21,9 +21,30 @@ const querySchema = `
     venues: [Venue!]!
     """
     unifiedSearch(
+      """
+      Free form query string, corresponding to user search input
+      """
       q: String,
+
+      """
+      Types of content to include (default: all)
+      """
       categories: [UnifiedSearchResultCategory!],
+
+      """
+      Types of content to exclude (default: none)
+      """
       excludedCategories: [UnifiedSearchResultCategory!],
+
+      """
+      What general topic (e.g. sports) to favour in search results,
+      corresponds to the theme of the site making the API call
+      """
+      themePreference: [UnifiedSearchTheme!],
+
+      """
+      How many results to give
+      """
       first: Int,
       after: String): SearchResultConnection
   }
